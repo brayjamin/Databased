@@ -58,6 +58,12 @@ class CursedPlayer (private val uuid: String) : Databased {
                 e.printStackTrace()
             }
         }
-        getGadgets()
+        try {
+            getGadgets()
+            getServer()
+            isOnline()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
