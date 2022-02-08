@@ -1,4 +1,4 @@
-package cursedmc.curseddb.sql
+package org.cursedmc.sql
 
 import me.vagdedes.mysql.database.MySQL
 import me.vagdedes.mysql.database.SQL
@@ -14,6 +14,9 @@ interface Databased {
     }
     fun getString (table: String, column: String, key: String, value: String): String? {
         return query(table, key, value)?.getString(column)
+    }
+    fun getBoolean (table: String, column: String, key: String, value: String): Boolean? {
+        return query(table, key, value)?.getBoolean(column)
     }
     fun setString (table: String, column: String, key: String, value: String, newValue: String) {
         MySQL.update("UPDATE $table SET $column = '$newValue' WHERE $key = '$value'")

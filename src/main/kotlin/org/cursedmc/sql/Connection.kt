@@ -1,4 +1,4 @@
-package cursedmc.curseddb.sql
+package org.cursedmc.sql
 
 import me.vagdedes.mysql.basic.Config
 import me.vagdedes.mysql.database.MySQL

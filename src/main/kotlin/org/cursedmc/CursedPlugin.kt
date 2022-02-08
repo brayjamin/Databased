@@ -1,13 +1,15 @@
-package cursedmc.curseddb
+package org.cursedmc
 
-import cursedmc.curseddb.sql.Databased
-import cursedmc.curseddb.sql.SQLConfig
+import org.cursedmc.sql.Databased
+import org.cursedmc.sql.SQLConfig
 import org.bukkit.plugin.java.JavaPlugin
+import org.cursedmc.sql.Connection
 
 class CursedPlugin: JavaPlugin() {
     companion object {
         var instance: CursedPlugin? = null
         var sqlConfig: SQLConfig? = null
+        var connection: Connection? = null
             private set
     }
     override fun onEnable() {
@@ -18,7 +20,13 @@ class CursedPlugin: JavaPlugin() {
                 username = config.getString("database.username"),
                 password = config.getString("database.password"),
                 driver = config.getString("database.driver"))
-        CursedInit(sqlConfig!!)
+        connection = Connection(sqlConfig!!)
+        connection!!.connect()
 
+    }
+
+    override fun onDisable() {
+        connection?.disconnect()
+        this.logger.info("Disconnected from database")
     }
 }
